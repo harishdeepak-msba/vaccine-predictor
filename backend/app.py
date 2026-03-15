@@ -52,4 +52,8 @@ if __name__ == "__main__":
 
 **Step 4.** Save → GitHub Desktop → commit message:
 ```
+<<<<<<< HEAD
 Clean rewrite of app.py
+=======
+Clean rewrite of app.py
+>>>>>>> 2830cfd328c952950ec2669b6805b7b0072f6072
