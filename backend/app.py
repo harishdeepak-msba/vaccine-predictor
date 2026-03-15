@@ -7,13 +7,14 @@ import anthropic
 app = Flask(__name__)
 CORS(app)
 
-client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
-
-SYSTEM_PROMPT = "You are a vaccine uptake prediction model. Respond ONLY with valid JSON."
-
 @app.route("/api/health", methods=["GET"])
 def health():
-    return jsonify({"status": "healthy", "service": "vaccine-predictor-api"})
+    key = os.environ.get("ANTHROPIC_API_KEY")
+    return jsonify({
+        "status": "healthy",
+        "key_found": key is not None,
+        "key_prefix": key[:15] if key else "NOT SET"
+    })
 
 @app.route("/api/predict", methods=["POST"])
 def predict():
@@ -32,10 +33,11 @@ Respond ONLY with this JSON:
   "reasoning": "<2-3 sentences on main drivers>"
 }}"""
     try:
+        client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
         message = client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=400,
-            system=SYSTEM_PROMPT,
+            system="You are a vaccine uptake prediction model. Respond ONLY with valid JSON.",
             messages=[{"role": "user", "content": user_prompt}]
         )
         raw = message.content[0].text.strip()
@@ -48,3 +50,8 @@ Respond ONLY with this JSON:
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+```
+
+Commit directly to main → wait for Live → then open:
+```
+https://vaccine-predictor.onrender.com/api/health
