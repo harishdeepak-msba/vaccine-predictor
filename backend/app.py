@@ -9,7 +9,7 @@ CORS(app)
 
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
-SYSTEM_PROMPT = """You are a vaccine uptake prediction model trained on the National H1N1 Flu Survey dataset. When given individual-level features, estimate probabilities for H1N1 and seasonal flu vaccine uptake. Always respond with ONLY valid JSON, no markdown, no extra text."""
+SYSTEM_PROMPT = "You are a vaccine uptake prediction model. Respond ONLY with valid JSON."
 
 @app.route("/api/health", methods=["GET"])
 def health():
@@ -48,12 +48,3 @@ Respond ONLY with this JSON:
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-```
-
-**Step 4.** Save → GitHub Desktop → commit message:
-```
-<<<<<<< HEAD
-Clean rewrite of app.py
-=======
-Clean rewrite of app.py
->>>>>>> 2830cfd328c952950ec2669b6805b7b0072f6072
