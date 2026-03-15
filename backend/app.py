@@ -6,7 +6,6 @@ import anthropic
 
 app = Flask(__name__)
 CORS(app)
-```
 Fix CORS
 
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
