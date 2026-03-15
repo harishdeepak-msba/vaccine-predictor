@@ -1,4 +1,7 @@
 flask
 flask-cors
-anthropic
+scikit-learn==1.6.1
+joblib
 gunicorn
+pandas
+numpy
