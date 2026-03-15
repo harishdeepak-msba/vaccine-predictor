@@ -5,7 +5,9 @@ from flask_cors import CORS
 import anthropic
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app)
+```
+Fix CORS
 
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
