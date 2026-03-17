@@ -24,6 +24,10 @@ FEATURE_COLS = [
     "marital_status","rent_or_own","employment_status","hhs_geo_region","census_msa",
     "household_adults","household_children","employment_industry","employment_occupation"
 ]
+@app.route("/", methods=["GET"])
+def index():
+    from flask import redirect
+    return redirect("https://harishdeepak-msba.github.io/vaccine-predictor/")
 
 @app.route("/api/health", methods=["GET"])
 def health():
